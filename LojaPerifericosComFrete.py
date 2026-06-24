@@ -1,29 +1,69 @@
 import csv
+import os
 
-print("======== BEM VINDO ========\n"
+print("========= BEM VINDO =========\n"
     "\n>  Escolha um de nossos produtos\n")
 
 def leitor(caminho):
-    with open(caminho) as inventario:
+    pasta = os.path.dirname(__file__)
+    caminho_completo = os.path.join(pasta, caminho)
+    with open(caminho_completo) as inventario:
         return list(csv.DictReader(inventario))
-    
-def lista_produtos(dados):
-    for item in dados:
+
+def lista_produtos(par1): # LISTA DE PRODUTOS
+    print("------------------------------")
+    for item in par1:
+        print(item['produto'], item['marca'])
         print("------------------------------")
-        print(item['produto'], item['marca'],"/ R$", item['valor'])
+
 
 dados = leitor("inventario.csv")
 lista_produtos(dados)
 
-escolha = input("\nDigite o produto aqui! : ").lower()
+escolha = input("\nEscolha um de nossos produtos! : ").lower()
 
-if escolha in dados:
-    if escolha == item['produto'] + item['marca']:
-        print("R$", item['valor'])
-    else:
-        print("Sinto Muito. Não oferecemos esse produto na nossa loja. ")
+# ESCOLHA NUMERO DOIS 
+
+def escolhap2(escolha):
+    print("------------------------------")
+    if escolha in ["mouse", "teclado", "mousepad", "microfone"]:
+        Descolha = leitor(f"{escolha}.csv")
+        for item in Descolha:
+            print(item[f'{escolha}'], item['marca'], "/ R$", item['valor'])
+            print("------------------------------")
+     
+
+if escolha in ["mouse", "teclado", "mousepad", "microfone"]:
+    escolhap2(escolha)
 else:
-    print("Sinto Muito. Não oferecemos esse produto na nossa loja. ")
+    # busca produto específico ex: "mouse logitech"
+    for item in dados:
+        if escolha == item['produto'].lower() + " " + item['marca'].lower():
+            print("O valor do produto escolhido é de R$", item['valor'])
+            break
+    else:
+        print("Não possuímos este produto.")
+
+# FRETE
+
+escolha3 = input("\nEscolha um de nossos produtos! : ").lower()
+
+for item in leitor(f"{escolha}.csv"):
+    if escolha3 == item[f'{escolha}'] + " " + item['marca']:
+        print(item['valor'])
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 
 tnorte = 30
 tnordeste = 20
