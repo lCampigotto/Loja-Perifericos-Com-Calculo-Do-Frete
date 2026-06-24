@@ -45,6 +45,7 @@ for item in leitor(f"{escolha}.csv"):
     if escolha3 == item[f'{escolha}'].lower() + " " + item['marca'].lower():
         print("O produto escolhido possui o valor de R$", item['valor'])
         valorcompra = float(item['valor'])
+        break
 else:
     print("Não possuímos este produto.")
 
@@ -63,6 +64,7 @@ if regiao in ["norte", "nordeste", "centro oeste", "sudeste", "sul"]:
     taxaFrete = fretes[regiao]
     ValorTotal = valorcompra + taxaFrete
     print(f"\nO valor do produto é de R$ {valorcompra}  |  O valor do frete para sua região é de R$ {taxaFrete}  |  E o Valor total é de R$ {ValorTotal}")  
-    print("\n======== FIM DO ATENDIMENtO ========")
+    print("\n======== FIM DO ATENDIMENTO ========")
 else:
     print("Não atendemos esta região")
+
