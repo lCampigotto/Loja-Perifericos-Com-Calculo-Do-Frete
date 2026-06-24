@@ -26,47 +26,43 @@ escolha = input("\nEscolha um de nossos produtos! : ").lower()
 
 def escolhap2(escolha):
     print("------------------------------")
-    if escolha in ["mouse", "teclado", "mousepad", "microfone"]:
-        Descolha = leitor(f"{escolha}.csv")
-        for item in Descolha:
-            print(item[f'{escolha}'], item['marca'], "/ R$", item['valor'])
-            print("------------------------------")
-     
+    Descolha = leitor(f"{escolha}.csv")
+    for item in Descolha:
+        print(item[f'{escolha}'], item['marca'], "/ R$", item['valor'])
+        print("------------------------------")  
 
 if escolha in ["mouse", "teclado", "mousepad", "microfone"]:
     escolhap2(escolha)
 else:
-    # busca produto específico ex: "mouse logitech"
-    for item in dados:
-        if escolha == item['produto'].lower() + " " + item['marca'].lower():
-            print("O valor do produto escolhido é de R$", item['valor'])
-            break
-    else:
-        print("Não possuímos este produto.")
+    print("Não possuímos este produto.")
 
-# FRETE
+# Mostra Valor, e oende região
 
 escolha3 = input("\nEscolha um de nossos produtos! : ").lower()
 
+
 for item in leitor(f"{escolha}.csv"):
-    if escolha3 == item[f'{escolha}'] + " " + item['marca']:
-        print(item['valor'])
- 
+    if escolha3 == item[f'{escolha}'].lower() + " " + item['marca'].lower():
+        print("O produto escolhido possui o valor de R$", item['valor'])
+        valorcompra = float(item['valor'])
+else:
+    print("Não possuímos este produto.")
 
+# Calculo frete
+fretes = {
+    "norte": 30,
+    "nordeste": 20,
+    "centro oeste" : 15,
+    "sudeste" : 10,
+    "sul" : 15,
+}
 
+regiao = input("Digite a região do destinatário : ").lower()
 
-
-
-
-
-
-
-
-
-
-
-tnorte = 30
-tnordeste = 20
-tcentrooeste = 15
-tsudeste = 10
-tsul = 15
+if regiao in ["norte", "nordeste", "centro oeste", "sudeste", "sul"]:
+    taxaFrete = fretes[regiao]
+    ValorTotal = valorcompra + taxaFrete
+    print(f"\nO valor do produto é de R$ {valorcompra}  |  O valor do frete para sua região é de R$ {taxaFrete}  |  E o Valor total é de R$ {ValorTotal}")  
+    print("\n======== FIM DO ATENDIMENtO ========")
+else:
+    print("Não atendemos esta região")
